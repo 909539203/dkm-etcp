@@ -1,2 +1,2 @@
 # dkm-etcp
-ETCP project
+ETCP Project
