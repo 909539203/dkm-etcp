@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etcp.mapper.TbCustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.etcp.pojo.TbCustomer" >
+    <id column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="linkman_name" property="linkmanName" jdbcType="VARCHAR" />
+    <result column="linkman_mobile" property="linkmanMobile" jdbcType="BIGINT" />
+    <result column="linkman_email" property="linkmanEmail" jdbcType="VARCHAR" />
+    <result column="license_number" property="licenseNumber" jdbcType="VARCHAR" />
+    <result column="tax_number" property="taxNumber" jdbcType="VARCHAR" />
+    <result column="org_number" property="orgNumber" jdbcType="VARCHAR" />
+    <result column="logo_pic" property="logoPic" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+    <result column="legal_person_card_id" property="legalPersonCardId" jdbcType="VARCHAR" />
+    <result column="bank_user" property="bankUser" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="key1" property="key1" jdbcType="VARCHAR" />
+    <result column="key2" property="key2" jdbcType="VARCHAR" />
+    <result column="key3" property="key3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    customer_id, login_name, password, org_name, status, address_detail, telephone, linkman_name, 
+    linkman_mobile, linkman_email, license_number, tax_number, org_number, logo_pic, 
+    created, legal_person, legal_person_card_id, bank_user, bank_name, key1, key2, key3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.etcp.pojo.TbCustomerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_customer
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_customer
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.etcp.pojo.TbCustomerExample" >
+    delete from tb_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.etcp.pojo.TbCustomer" >
+    insert into tb_customer (customer_id, login_name, password, 
+      org_name, status, address_detail, 
+      telephone, linkman_name, linkman_mobile, 
+      linkman_email, license_number, tax_number, 
+      org_number, logo_pic, created, 
+      legal_person, legal_person_card_id, bank_user, 
+      bank_name, key1, key2, 
+      key3)
+    values (#{customerId,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{linkmanName,jdbcType=VARCHAR}, #{linkmanMobile,jdbcType=BIGINT}, 
+      #{linkmanEmail,jdbcType=VARCHAR}, #{licenseNumber,jdbcType=VARCHAR}, #{taxNumber,jdbcType=VARCHAR}, 
+      #{orgNumber,jdbcType=VARCHAR}, #{logoPic,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+      #{legalPerson,jdbcType=VARCHAR}, #{legalPersonCardId,jdbcType=VARCHAR}, #{bankUser,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=VARCHAR}, #{key1,jdbcType=VARCHAR}, #{key2,jdbcType=VARCHAR}, 
+      #{key3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.etcp.pojo.TbCustomer" >
+    insert into tb_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="addressDetail != null" >
+        address_detail,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="linkmanName != null" >
+        linkman_name,
+      </if>
+      <if test="linkmanMobile != null" >
+        linkman_mobile,
+      </if>
+      <if test="linkmanEmail != null" >
+        linkman_email,
+      </if>
+      <if test="licenseNumber != null" >
+        license_number,
+      </if>
+      <if test="taxNumber != null" >
+        tax_number,
+      </if>
+      <if test="orgNumber != null" >
+        org_number,
+      </if>
+      <if test="logoPic != null" >
+        logo_pic,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="legalPerson != null" >
+        legal_person,
+      </if>
+      <if test="legalPersonCardId != null" >
+        legal_person_card_id,
+      </if>
+      <if test="bankUser != null" >
+        bank_user,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="key1 != null" >
+        key1,
+      </if>
+      <if test="key2 != null" >
+        key2,
+      </if>
+      <if test="key3 != null" >
+        key3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addressDetail != null" >
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanName != null" >
+        #{linkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanMobile != null" >
+        #{linkmanMobile,jdbcType=BIGINT},
+      </if>
+      <if test="linkmanEmail != null" >
+        #{linkmanEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNumber != null" >
+        #{licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNumber != null" >
+        #{taxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNumber != null" >
+        #{orgNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="logoPic != null" >
+        #{logoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="legalPerson != null" >
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonCardId != null" >
+        #{legalPersonCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankUser != null" >
+        #{bankUser,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="key1 != null" >
+        #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null" >
+        #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null" >
+        #{key3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.etcp.pojo.TbCustomerExample" resultType="java.lang.Integer" >
+    select count(*) from tb_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_customer
+    <set >
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.loginName != null" >
+        login_name = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressDetail != null" >
+        address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkmanName != null" >
+        linkman_name = #{record.linkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkmanMobile != null" >
+        linkman_mobile = #{record.linkmanMobile,jdbcType=BIGINT},
+      </if>
+      <if test="record.linkmanEmail != null" >
+        linkman_email = #{record.linkmanEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseNumber != null" >
+        license_number = #{record.licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxNumber != null" >
+        tax_number = #{record.taxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgNumber != null" >
+        org_number = #{record.orgNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logoPic != null" >
+        logo_pic = #{record.logoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null" >
+        created = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.legalPerson != null" >
+        legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalPersonCardId != null" >
+        legal_person_card_id = #{record.legalPersonCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankUser != null" >
+        bank_user = #{record.bankUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.key1 != null" >
+        key1 = #{record.key1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.key2 != null" >
+        key2 = #{record.key2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.key3 != null" >
+        key3 = #{record.key3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_customer
+    set customer_id = #{record.customerId,jdbcType=BIGINT},
+      login_name = #{record.loginName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      linkman_name = #{record.linkmanName,jdbcType=VARCHAR},
+      linkman_mobile = #{record.linkmanMobile,jdbcType=BIGINT},
+      linkman_email = #{record.linkmanEmail,jdbcType=VARCHAR},
+      license_number = #{record.licenseNumber,jdbcType=VARCHAR},
+      tax_number = #{record.taxNumber,jdbcType=VARCHAR},
+      org_number = #{record.orgNumber,jdbcType=VARCHAR},
+      logo_pic = #{record.logoPic,jdbcType=VARCHAR},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+      legal_person_card_id = #{record.legalPersonCardId,jdbcType=VARCHAR},
+      bank_user = #{record.bankUser,jdbcType=VARCHAR},
+      bank_name = #{record.bankName,jdbcType=VARCHAR},
+      key1 = #{record.key1,jdbcType=VARCHAR},
+      key2 = #{record.key2,jdbcType=VARCHAR},
+      key3 = #{record.key3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.etcp.pojo.TbCustomer" >
+    update tb_customer
+    <set >
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addressDetail != null" >
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanName != null" >
+        linkman_name = #{linkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanMobile != null" >
+        linkman_mobile = #{linkmanMobile,jdbcType=BIGINT},
+      </if>
+      <if test="linkmanEmail != null" >
+        linkman_email = #{linkmanEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNumber != null" >
+        license_number = #{licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNumber != null" >
+        tax_number = #{taxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNumber != null" >
+        org_number = #{orgNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="logoPic != null" >
+        logo_pic = #{logoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="legalPerson != null" >
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonCardId != null" >
+        legal_person_card_id = #{legalPersonCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankUser != null" >
+        bank_user = #{bankUser,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="key1 != null" >
+        key1 = #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null" >
+        key2 = #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null" >
+        key3 = #{key3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.etcp.pojo.TbCustomer" >
+    update tb_customer
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      linkman_name = #{linkmanName,jdbcType=VARCHAR},
+      linkman_mobile = #{linkmanMobile,jdbcType=BIGINT},
+      linkman_email = #{linkmanEmail,jdbcType=VARCHAR},
+      license_number = #{licenseNumber,jdbcType=VARCHAR},
+      tax_number = #{taxNumber,jdbcType=VARCHAR},
+      org_number = #{orgNumber,jdbcType=VARCHAR},
+      logo_pic = #{logoPic,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      legal_person_card_id = #{legalPersonCardId,jdbcType=VARCHAR},
+      bank_user = #{bankUser,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      key1 = #{key1,jdbcType=VARCHAR},
+      key2 = #{key2,jdbcType=VARCHAR},
+      key3 = #{key3,jdbcType=VARCHAR}
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updatePassword" parameterType="entity.Password">
+    UPDATE  tb_customer
+    <set>
+        <if test="newPassword != null">
+          password = #{newPassword,jdbcType=VARCHAR},
+        </if>
+    </set>
+    WHERE  customer_id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

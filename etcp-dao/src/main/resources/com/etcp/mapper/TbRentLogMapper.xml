@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etcp.mapper.TbRentLogMapper" >
+  <resultMap id="BaseResultMap" type="com.etcp.pojo.TbRentLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ower_id" property="owerId" jdbcType="BIGINT" />
+    <result column="park_id" property="parkId" jdbcType="BIGINT" />
+    <result column="put_time" property="putTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="in_time" property="inTime" jdbcType="TIMESTAMP" />
+    <result column="out_time" property="outTime" jdbcType="TIMESTAMP" />
+    <result column="time" property="time" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="key1" property="key1" jdbcType="VARCHAR" />
+    <result column="key2" property="key2" jdbcType="VARCHAR" />
+    <result column="key3" property="key3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ower_id, park_id, put_time, status, in_time, out_time, time, money, key1, key2, 
+    key3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.etcp.pojo.TbRentLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_rent_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_rent_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_rent_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.etcp.pojo.TbRentLogExample" >
+    delete from tb_rent_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.etcp.pojo.TbRentLog" >
+    insert into tb_rent_log (id, ower_id, park_id, 
+      put_time, status, in_time, 
+      out_time, time, money, 
+      key1, key2, key3)
+    values (#{id,jdbcType=BIGINT}, #{owerId,jdbcType=BIGINT}, #{parkId,jdbcType=BIGINT}, 
+      #{putTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{inTime,jdbcType=TIMESTAMP}, 
+      #{outTime,jdbcType=TIMESTAMP}, #{time,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{key1,jdbcType=VARCHAR}, #{key2,jdbcType=VARCHAR}, #{key3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.etcp.pojo.TbRentLog" >
+    insert into tb_rent_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="owerId != null" >
+        ower_id,
+      </if>
+      <if test="parkId != null" >
+        park_id,
+      </if>
+      <if test="putTime != null" >
+        put_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="inTime != null" >
+        in_time,
+      </if>
+      <if test="outTime != null" >
+        out_time,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="key1 != null" >
+        key1,
+      </if>
+      <if test="key2 != null" >
+        key2,
+      </if>
+      <if test="key3 != null" >
+        key3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="owerId != null" >
+        #{owerId,jdbcType=BIGINT},
+      </if>
+      <if test="parkId != null" >
+        #{parkId,jdbcType=BIGINT},
+      </if>
+      <if test="putTime != null" >
+        #{putTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="inTime != null" >
+        #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTime != null" >
+        #{outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="key1 != null" >
+        #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null" >
+        #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null" >
+        #{key3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.etcp.pojo.TbRentLogExample" resultType="java.lang.Integer" >
+    select count(*) from tb_rent_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_rent_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.owerId != null" >
+        ower_id = #{record.owerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.parkId != null" >
+        park_id = #{record.parkId,jdbcType=BIGINT},
+      </if>
+      <if test="record.putTime != null" >
+        put_time = #{record.putTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.inTime != null" >
+        in_time = #{record.inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.outTime != null" >
+        out_time = #{record.outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=INTEGER},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.key1 != null" >
+        key1 = #{record.key1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.key2 != null" >
+        key2 = #{record.key2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.key3 != null" >
+        key3 = #{record.key3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_rent_log
+    set id = #{record.id,jdbcType=BIGINT},
+      ower_id = #{record.owerId,jdbcType=BIGINT},
+      park_id = #{record.parkId,jdbcType=BIGINT},
+      put_time = #{record.putTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      in_time = #{record.inTime,jdbcType=TIMESTAMP},
+      out_time = #{record.outTime,jdbcType=TIMESTAMP},
+      time = #{record.time,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=DECIMAL},
+      key1 = #{record.key1,jdbcType=VARCHAR},
+      key2 = #{record.key2,jdbcType=VARCHAR},
+      key3 = #{record.key3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.etcp.pojo.TbRentLog" >
+    update tb_rent_log
+    <set >
+      <if test="owerId != null" >
+        ower_id = #{owerId,jdbcType=BIGINT},
+      </if>
+      <if test="parkId != null" >
+        park_id = #{parkId,jdbcType=BIGINT},
+      </if>
+      <if test="putTime != null" >
+        put_time = #{putTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="inTime != null" >
+        in_time = #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTime != null" >
+        out_time = #{outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="key1 != null" >
+        key1 = #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null" >
+        key2 = #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null" >
+        key3 = #{key3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.etcp.pojo.TbRentLog" >
+    update tb_rent_log
+    set ower_id = #{owerId,jdbcType=BIGINT},
+      park_id = #{parkId,jdbcType=BIGINT},
+      put_time = #{putTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      in_time = #{inTime,jdbcType=TIMESTAMP},
+      out_time = #{outTime,jdbcType=TIMESTAMP},
+      time = #{time,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      key1 = #{key1,jdbcType=VARCHAR},
+      key2 = #{key2,jdbcType=VARCHAR},
+      key3 = #{key3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

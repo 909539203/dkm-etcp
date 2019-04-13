@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etcp.mapper.TbUserMapper" >
+  <resultMap id="BaseResultMap" type="com.etcp.pojo.TbUser" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="BIGINT" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="carNo" property="carno" jdbcType="BIGINT" />
+    <result column="relatedNo" property="relatedno" jdbcType="VARCHAR" />
+    <result column="driving_id" property="drivingId" jdbcType="BIGINT" />
+    <result column="regTime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
+    <result column="isRealName" property="isrealname" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="head_pic" property="headPic" jdbcType="VARCHAR" />
+    <result column="weixinStatus" property="weixinstatus" jdbcType="INTEGER" />
+    <result column="weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="emailStatus" property="emailstatus" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="acccount" property="acccount" jdbcType="DECIMAL" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="points" property="points" jdbcType="INTEGER" />
+    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="havaPark" property="havapark" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="rentPark" property="rentpark" jdbcType="INTEGER" />
+    <result column="isCheck" property="ischeck" jdbcType="INTEGER" />
+    <result column="key1" property="key1" jdbcType="VARCHAR" />
+    <result column="key2" property="key2" jdbcType="VARCHAR" />
+    <result column="key3" property="key3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, username, password, gender, mobile, created, carNo, relatedNo, driving_id, 
+    regTime, loginTime, isRealName, status, head_pic, weixinStatus, weixin, emailStatus, 
+    email, acccount, level, points, lastTime, havaPark, num, rentPark, isCheck, key1, 
+    key2, key3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.etcp.pojo.TbUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.etcp.pojo.TbUserExample" >
+    delete from tb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.etcp.pojo.TbUser" >
+    insert into tb_user (user_id, username, password, 
+      gender, mobile, created, 
+      carNo, relatedNo, driving_id, 
+      regTime, loginTime, isRealName, 
+      status, head_pic, weixinStatus, 
+      weixin, emailStatus, email, 
+      acccount, level, points, 
+      lastTime, havaPark, num, 
+      rentPark, isCheck, key1, 
+      key2, key3)
+    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER}, #{mobile,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
+      #{carno,jdbcType=BIGINT}, #{relatedno,jdbcType=VARCHAR}, #{drivingId,jdbcType=BIGINT}, 
+      #{regtime,jdbcType=TIMESTAMP}, #{logintime,jdbcType=TIMESTAMP}, #{isrealname,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{headPic,jdbcType=VARCHAR}, #{weixinstatus,jdbcType=INTEGER}, 
+      #{weixin,jdbcType=VARCHAR}, #{emailstatus,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+      #{acccount,jdbcType=DECIMAL}, #{level,jdbcType=INTEGER}, #{points,jdbcType=INTEGER}, 
+      #{lasttime,jdbcType=TIMESTAMP}, #{havapark,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
+      #{rentpark,jdbcType=INTEGER}, #{ischeck,jdbcType=INTEGER}, #{key1,jdbcType=VARCHAR}, 
+      #{key2,jdbcType=VARCHAR}, #{key3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.etcp.pojo.TbUser" >
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="carno != null" >
+        carNo,
+      </if>
+      <if test="relatedno != null" >
+        relatedNo,
+      </if>
+      <if test="drivingId != null" >
+        driving_id,
+      </if>
+      <if test="regtime != null" >
+        regTime,
+      </if>
+      <if test="logintime != null" >
+        loginTime,
+      </if>
+      <if test="isrealname != null" >
+        isRealName,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="headPic != null" >
+        head_pic,
+      </if>
+      <if test="weixinstatus != null" >
+        weixinStatus,
+      </if>
+      <if test="weixin != null" >
+        weixin,
+      </if>
+      <if test="emailstatus != null" >
+        emailStatus,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="acccount != null" >
+        acccount,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="lasttime != null" >
+        lastTime,
+      </if>
+      <if test="havapark != null" >
+        havaPark,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="rentpark != null" >
+        rentPark,
+      </if>
+      <if test="ischeck != null" >
+        isCheck,
+      </if>
+      <if test="key1 != null" >
+        key1,
+      </if>
+      <if test="key2 != null" >
+        key2,
+      </if>
+      <if test="key3 != null" >
+        key3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=BIGINT},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carno != null" >
+        #{carno,jdbcType=BIGINT},
+      </if>
+      <if test="relatedno != null" >
+        #{relatedno,jdbcType=VARCHAR},
+      </if>
+      <if test="drivingId != null" >
+        #{drivingId,jdbcType=BIGINT},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrealname != null" >
+        #{isrealname,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="headPic != null" >
+        #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinstatus != null" >
+        #{weixinstatus,jdbcType=INTEGER},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="emailstatus != null" >
+        #{emailstatus,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="acccount != null" >
+        #{acccount,jdbcType=DECIMAL},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="havapark != null" >
+        #{havapark,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="rentpark != null" >
+        #{rentpark,jdbcType=INTEGER},
+      </if>
+      <if test="ischeck != null" >
+        #{ischeck,jdbcType=INTEGER},
+      </if>
+      <if test="key1 != null" >
+        #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null" >
+        #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null" >
+        #{key3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.etcp.pojo.TbUserExample" resultType="java.lang.Integer" >
+    select count(*) from tb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=BIGINT},
+      </if>
+      <if test="record.created != null" >
+        created = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.carno != null" >
+        carNo = #{record.carno,jdbcType=BIGINT},
+      </if>
+      <if test="record.relatedno != null" >
+        relatedNo = #{record.relatedno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drivingId != null" >
+        driving_id = #{record.drivingId,jdbcType=BIGINT},
+      </if>
+      <if test="record.regtime != null" >
+        regTime = #{record.regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logintime != null" >
+        loginTime = #{record.logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isrealname != null" >
+        isRealName = #{record.isrealname,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.headPic != null" >
+        head_pic = #{record.headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixinstatus != null" >
+        weixinStatus = #{record.weixinstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.weixin != null" >
+        weixin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailstatus != null" >
+        emailStatus = #{record.emailstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acccount != null" >
+        acccount = #{record.acccount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.points != null" >
+        points = #{record.points,jdbcType=INTEGER},
+      </if>
+      <if test="record.lasttime != null" >
+        lastTime = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.havapark != null" >
+        havaPark = #{record.havapark,jdbcType=INTEGER},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.rentpark != null" >
+        rentPark = #{record.rentpark,jdbcType=INTEGER},
+      </if>
+      <if test="record.ischeck != null" >
+        isCheck = #{record.ischeck,jdbcType=INTEGER},
+      </if>
+      <if test="record.key1 != null" >
+        key1 = #{record.key1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.key2 != null" >
+        key2 = #{record.key2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.key3 != null" >
+        key3 = #{record.key3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_user
+    set user_id = #{record.userId,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=INTEGER},
+      mobile = #{record.mobile,jdbcType=BIGINT},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      carNo = #{record.carno,jdbcType=BIGINT},
+      relatedNo = #{record.relatedno,jdbcType=VARCHAR},
+      driving_id = #{record.drivingId,jdbcType=BIGINT},
+      regTime = #{record.regtime,jdbcType=TIMESTAMP},
+      loginTime = #{record.logintime,jdbcType=TIMESTAMP},
+      isRealName = #{record.isrealname,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      head_pic = #{record.headPic,jdbcType=VARCHAR},
+      weixinStatus = #{record.weixinstatus,jdbcType=INTEGER},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      emailStatus = #{record.emailstatus,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      acccount = #{record.acccount,jdbcType=DECIMAL},
+      level = #{record.level,jdbcType=INTEGER},
+      points = #{record.points,jdbcType=INTEGER},
+      lastTime = #{record.lasttime,jdbcType=TIMESTAMP},
+      havaPark = #{record.havapark,jdbcType=INTEGER},
+      num = #{record.num,jdbcType=INTEGER},
+      rentPark = #{record.rentpark,jdbcType=INTEGER},
+      isCheck = #{record.ischeck,jdbcType=INTEGER},
+      key1 = #{record.key1,jdbcType=VARCHAR},
+      key2 = #{record.key2,jdbcType=VARCHAR},
+      key3 = #{record.key3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.etcp.pojo.TbUser" >
+    update tb_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=BIGINT},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carno != null" >
+        carNo = #{carno,jdbcType=BIGINT},
+      </if>
+      <if test="relatedno != null" >
+        relatedNo = #{relatedno,jdbcType=VARCHAR},
+      </if>
+      <if test="drivingId != null" >
+        driving_id = #{drivingId,jdbcType=BIGINT},
+      </if>
+      <if test="regtime != null" >
+        regTime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logintime != null" >
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrealname != null" >
+        isRealName = #{isrealname,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="headPic != null" >
+        head_pic = #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinstatus != null" >
+        weixinStatus = #{weixinstatus,jdbcType=INTEGER},
+      </if>
+      <if test="weixin != null" >
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="emailstatus != null" >
+        emailStatus = #{emailstatus,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="acccount != null" >
+        acccount = #{acccount,jdbcType=DECIMAL},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=INTEGER},
+      </if>
+      <if test="lasttime != null" >
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="havapark != null" >
+        havaPark = #{havapark,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="rentpark != null" >
+        rentPark = #{rentpark,jdbcType=INTEGER},
+      </if>
+      <if test="ischeck != null" >
+        isCheck = #{ischeck,jdbcType=INTEGER},
+      </if>
+      <if test="key1 != null" >
+        key1 = #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null" >
+        key2 = #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null" >
+        key3 = #{key3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.etcp.pojo.TbUser" >
+    update tb_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=BIGINT},
+      created = #{created,jdbcType=TIMESTAMP},
+      carNo = #{carno,jdbcType=BIGINT},
+      relatedNo = #{relatedno,jdbcType=VARCHAR},
+      driving_id = #{drivingId,jdbcType=BIGINT},
+      regTime = #{regtime,jdbcType=TIMESTAMP},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      isRealName = #{isrealname,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      head_pic = #{headPic,jdbcType=VARCHAR},
+      weixinStatus = #{weixinstatus,jdbcType=INTEGER},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      emailStatus = #{emailstatus,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      acccount = #{acccount,jdbcType=DECIMAL},
+      level = #{level,jdbcType=INTEGER},
+      points = #{points,jdbcType=INTEGER},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      havaPark = #{havapark,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      rentPark = #{rentpark,jdbcType=INTEGER},
+      isCheck = #{ischeck,jdbcType=INTEGER},
+      key1 = #{key1,jdbcType=VARCHAR},
+      key2 = #{key2,jdbcType=VARCHAR},
+      key3 = #{key3,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>
